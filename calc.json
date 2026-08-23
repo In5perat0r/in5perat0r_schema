@@ -157,10 +157,13 @@
                                                 },
                                                 "inputs": {
                                                     "type": "object"
+                                                },
+                                                "outputs": {
+                                                    "type": "object"
                                                 }
                                             },
                                             "additionalProperties": false,
-                                            "required": ["mode", "inputs"],
+                                            "required": ["mode", "inputs", "outputs"],
                                             "allOf": [
                                                 {
                                                     "if": {
