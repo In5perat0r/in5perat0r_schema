@@ -98,7 +98,8 @@
                         "enum": ["string", "number"]
                     }
                 },
-                "additionalProperties": false
+                "additionalProperties": false,
+                "required": ["label", "key", "input_type"]
             }
         },
         "outputs": {
@@ -114,7 +115,8 @@
                         "pattern": "^[a-z][a-z0-9]*$"
                     }
                 },
-                "additionalProperties": false
+                "additionalProperties": false,
+                "required": ["label", "key"]
             }
         },
         "eval": {
