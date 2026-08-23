@@ -1,6 +1,85 @@
 {
     "$id": "https://github.com/In5perat0r/in5perat0r_schema/blob/main/calc.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$defs": {
+        "inputProperty": {
+            "type": "object",
+            "properties": {
+                "mode": {
+                    "type": "string",
+                    "enum": ["value", "variable"]
+                },
+                "property": {}
+            },
+            "additionalProperties": false,
+            "required": ["mode", "property"],
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "mode": {
+                                "const": "value"
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "property": {
+                                "type": "number"
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": ["property"]
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "mode": {
+                                "const": "variable"
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "property": {
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": ["property"]
+                    }
+                }
+            ]
+        },
+        "outputProperty": {
+            "type": "object",
+            "properties": {
+                "variable": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": ["variable"]
+        },
+        "doubleInputs": {
+            "type": "object",
+            "properties": {
+                "first": {"$ref": "#/$defs/inputProperty"},
+                "second": {"$ref": "#/$defs/inputProperty"}
+            },
+            "additionalProperties": false,
+            "required": ["first", "second"]
+        },
+        "singleInput": {
+            "type": "object",
+            "properties": {
+                "number": {"$ref": "#/$defs/inputProperty"}
+            },
+            "additionalProperties": false,
+            "required": ["number"]
+        }
+    },
     "type": "object",
     "properties": {
         "$schema": {},
@@ -93,19 +172,8 @@
                                                     },
                                                     "then": {
                                                         "properties": {
-                                                            "inputs": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "first": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "second": {
-                                                                        "type": "number"
-                                                                    }
-                                                                },
-                                                                "additionalProperties": false,
-                                                                "required": ["first", "second"]
-                                                            }
+                                                            "inputs": {"$ref": "#/$defs/doubleInputs"},
+                                                            "outputs": {"$ref": "#/$defs/outputProperty"}
                                                         }
                                                     }
                                                 },
@@ -119,19 +187,8 @@
                                                     },
                                                     "then": {
                                                         "properties": {
-                                                            "inputs": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "first": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "second": {
-                                                                        "type": "number"
-                                                                    }
-                                                                },
-                                                                "additionalProperties": false,
-                                                                "required": ["first", "second"]
-                                                            }
+                                                            "inputs": {"$ref": "#/$defs/doubleInputs"},
+                                                            "outputs": {"$ref": "#/$defs/outputProperty"}
                                                         }
                                                     }
                                                 },
@@ -145,19 +202,8 @@
                                                     },
                                                     "then": {
                                                         "properties": {
-                                                            "inputs": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "first": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "second": {
-                                                                        "type": "number"
-                                                                    }
-                                                                },
-                                                                "additionalProperties": false,
-                                                                "required": ["first", "second"]
-                                                            }
+                                                            "inputs": {"$ref": "#/$defs/doubleInputs"},
+                                                            "outputs": {"$ref": "#/$defs/outputProperty"}
                                                         }
                                                     }
                                                 },
@@ -171,19 +217,8 @@
                                                     },
                                                     "then": {
                                                         "properties": {
-                                                            "inputs": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "first": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "second": {
-                                                                        "type": "number"
-                                                                    }
-                                                                },
-                                                                "additionalProperties": false,
-                                                                "required": ["first", "second"]
-                                                            }
+                                                            "inputs": {"$ref": "#/$defs/doubleInputs"},
+                                                            "outputs": {"$ref": "#/$defs/outputProperty"}
                                                         }
                                                     }
                                                 },
@@ -197,16 +232,8 @@
                                                     },
                                                     "then": {
                                                         "properties": {
-                                                            "inputs": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "number": {
-                                                                        "type": "number"
-                                                                    }
-                                                                },
-                                                                "additionalProperties": false,
-                                                                "required": ["number"]
-                                                            }
+                                                            "inputs": {"$ref": "#/$defs/singleInput"},
+                                                            "outputs": {"$ref": "#/$defs/outputProperty"}
                                                         }
                                                     }
                                                 }
