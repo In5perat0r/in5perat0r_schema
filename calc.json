@@ -165,52 +165,7 @@
                                                     "if": {
                                                         "properties": {
                                                             "mode": {
-                                                                "const": "add"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "inputs": {"$ref": "#/$defs/doubleInputs"},
-                                                            "outputs": {"$ref": "#/$defs/outputProperty"}
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "mode": {
-                                                                "const": "subtract"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "inputs": {"$ref": "#/$defs/doubleInputs"},
-                                                            "outputs": {"$ref": "#/$defs/outputProperty"}
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "mode": {
-                                                                "const": "multiply"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "inputs": {"$ref": "#/$defs/doubleInputs"},
-                                                            "outputs": {"$ref": "#/$defs/outputProperty"}
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "mode": {
-                                                                "const": "divide"
+                                                                "enum": ["add", "subtract", "multiply", "divide"]
                                                             }
                                                         }
                                                     },
