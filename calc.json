@@ -1,0 +1,50 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "$schema": {},
+        "profile_name": {
+            "type": "string"
+        },
+        "inputs": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "label": {
+                        "type": "string"
+                    },
+                    "key": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9]*$"
+                    },
+                    "input_type": {
+                        "enum": ["string", "number"]
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "outputs": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "label": {
+                        "type": "string"
+                    },
+                    "key": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9]*$"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "eval": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["profile_name", "inputs", "outputs", "eval"]
+}

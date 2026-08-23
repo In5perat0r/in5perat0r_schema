@@ -1,0 +1,72 @@
+{
+    "$id": "https://incodeks.eu/gpt_builder.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "$schema":{},
+        "title": {
+            "type": ["string", "null"]
+        },
+        "positive_prompt": {
+            "type": ["string", "null"]
+        },
+        "negative_prompt": {
+            "type": ["string", "null"]
+        },
+        "comment": {
+            "type": ["string", "null"]
+        },
+        "user_message": {
+            "type": "object",
+            "properties": {
+                "original_message": {
+                    "type": "string"
+                },
+                "translation": {
+                    "type": ["object", "null"],
+                    "properties": {
+                        "from_language": {
+                            "type": "string",
+                            "pattern": "^[A-Z]{2,3}$"
+                        },
+                        "translated_message": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": ["from_language", "translated_message"]
+                }
+            },
+            "additionalProperties": false,
+            "required": ["original_message", "translation"]
+        },
+        "violation": {
+            "type": "object",
+            "properties": {
+                "flag": {
+                    "type": "boolean"
+                },
+                "reason": {
+                    "type": ["string", "null"]
+                }
+            },
+            "additionalProperties": false,
+            "required": ["flag", "reason"]
+        },
+        "unscoped": {
+            "type": "object",
+            "properties": {
+                "flag": {
+                    "type": "boolean"
+                },
+                "reason": {
+                    "type": ["string", "null"]
+                }
+            },
+            "additionalProperties": false,
+            "required": ["flag", "reason"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["title", "positive_prompt", "negative_prompt", "comment", "user_message", "violation", "unscoped"]
+}

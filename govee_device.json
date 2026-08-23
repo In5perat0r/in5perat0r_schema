@@ -1,0 +1,55 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "$schema": {},
+        "code": {
+            "type": "integer"
+        },
+        "message": {
+            "type": "string"
+        },
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "sku": {
+                        "type": "string"
+                    },
+                    "device": {
+                        "type": "string",
+                        "pattern": "^([a-fA-F0-9]+:){7}[a-fA-F0-9]{2}$"
+                    },
+                    "deviceName": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "capabilities": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                },
+                                "instance": {
+                                    "type": "string"
+                                },
+                                "parameters": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    },
+    "additionalProperties": false
+}
