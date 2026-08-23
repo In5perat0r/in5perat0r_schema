@@ -27,9 +27,7 @@
                             "property": {
                                 "type": "number"
                             }
-                        },
-                        "additionalProperties": false,
-                        "required": ["property"]
+                        }
                     }
                 },
                 {
@@ -45,9 +43,7 @@
                             "property": {
                                 "type": "string"
                             }
-                        },
-                        "additionalProperties": false,
-                        "required": ["property"]
+                        }
                     }
                 }
             ]
