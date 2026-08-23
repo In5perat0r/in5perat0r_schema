@@ -43,7 +43,205 @@
             }
         },
         "eval": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+                "mode": {
+                    "type": "string",
+                    "enum": ["simple", "advanced"]
+                },
+                "configuration": { "type": "object" }
+            },
+            "additionalProperties": false,
+            "required": ["mode", "configuration"],
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "mode": {
+                                "const": "simple"
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "configuration": {
+                                "type": "object",
+                                "properties": {
+                                    "commands": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "mode": {
+                                                    "type": "string",
+                                                    "enum": ["add", "subtract", "multiply", "divide", "square"]
+                                                },
+                                                "inputs": {
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "additionalProperties": false,
+                                            "required": ["mode", "inputs"],
+                                            "allOf": [
+                                                {
+                                                    "if": {
+                                                        "properties": {
+                                                            "mode": {
+                                                                "const": "add"
+                                                            }
+                                                        }
+                                                    },
+                                                    "then": {
+                                                        "properties": {
+                                                            "inputs": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "first": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "second": {
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "additionalProperties": false,
+                                                                "required": ["first", "second"]
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "if": {
+                                                        "properties": {
+                                                            "mode": {
+                                                                "const": "subtract"
+                                                            }
+                                                        }
+                                                    },
+                                                    "then": {
+                                                        "properties": {
+                                                            "inputs": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "first": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "second": {
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "additionalProperties": false,
+                                                                "required": ["first", "second"]
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "if": {
+                                                        "properties": {
+                                                            "mode": {
+                                                                "const": "multiply"
+                                                            }
+                                                        }
+                                                    },
+                                                    "then": {
+                                                        "properties": {
+                                                            "inputs": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "first": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "second": {
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "additionalProperties": false,
+                                                                "required": ["first", "second"]
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "if": {
+                                                        "properties": {
+                                                            "mode": {
+                                                                "const": "divide"
+                                                            }
+                                                        }
+                                                    },
+                                                    "then": {
+                                                        "properties": {
+                                                            "inputs": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "first": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "second": {
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "additionalProperties": false,
+                                                                "required": ["first", "second"]
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "if": {
+                                                        "properties": {
+                                                            "mode": {
+                                                                "const": "square"
+                                                            }
+                                                        }
+                                                    },
+                                                    "then": {
+                                                        "properties": {
+                                                            "inputs": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "number": {
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "additionalProperties": false,
+                                                                "required": ["number"]
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "mode": {
+                                "const": "advanced"
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "configuration": {
+                                "type": "object",
+                                "properties": {
+                                    "script": {
+                                        "type": "string"
+                                    }
+                                },
+                                "additionalProperties": false,
+                                "required": ["script"]
+                            }
+                        }
+                    }
+                }
+            ]
         }
     },
     "additionalProperties": false,
