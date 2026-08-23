@@ -1,4 +1,5 @@
 {
+    "$id": "https://github.com/In5perat0r/in5perat0r_schema/blob/main/govee_device.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
     "properties": {

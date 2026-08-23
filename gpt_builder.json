@@ -1,5 +1,5 @@
 {
-    "$id": "https://incodeks.eu/gpt_builder.json",
+    "$id": "https://github.com/In5perat0r/in5perat0r_schema/blob/main/gpt_builder.json",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
     "properties": {
