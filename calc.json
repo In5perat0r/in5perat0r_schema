@@ -95,6 +95,7 @@
                         "pattern": "^[a-z][a-z0-9]*$"
                     },
                     "input_type": {
+                        "type": "string",
                         "enum": ["string", "number"]
                     }
                 },
