@@ -1,0 +1,115 @@
+{
+    "$id": "https://github.com/In5perat0r/in5perat0r_schema/blob/main/chat_export.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "messages": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "role": {
+                        "type": "string",
+                        "enum": ["assistant", "user"]
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "translation": {
+                        "type": ["object", "null"],
+                        "properties": {
+                            "from_language": {
+                                "type": "string",
+                                "pattern": "^[A-Z]{2,3}$"
+                            },
+                            "translated_content": {
+                                "type": "string"
+                            }
+                        },
+                        "required": ["from_language", "translated_content"],
+                        "additionalProperties": false
+                    },
+                    "used_tools": {
+                        "type": ["array", "null"],
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "tool_name": {
+                                    "type": "string"
+                                },
+                                "parameter": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["tool_name", "parameter"],
+                            "additionalProperties": false
+                        }
+                    },
+                    "user_attachments": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "filename": {
+                                    "type": "string"
+                                },
+                                "filetype": {
+                                    "type": "string",
+                                    "enum": [
+                                        "textfile",
+                                        "document",
+                                        "image",
+                                        "video",
+                                        "audio"
+                                    ]
+                                },
+                                "url": {
+                                    "type": ["string", "null"]
+                                }
+                            },
+                            "required": ["filename", "filetype"],
+                            "additionalProperties": false
+                        }
+                    },
+                    "generated_files": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "filename": {
+                                    "type": "string"
+                                },
+                                "content": {
+                                    "type": "string"
+                                },
+                                "translation": {
+                                    "type": ["object", "null"],
+                                    "properties": {
+                                        "from_language": {
+                                            "type": "string",
+                                            "pattern": "^[A-Z]{2,3}$"
+                                        },
+                                        "translated_content": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": ["from_language", "translated_content"],
+                                    "additionalProperties": false
+                                }
+                            },
+                            "required": ["filename", "content", "translation"],
+                            "additionalProperties": false
+                        }
+                    }
+                },
+                "required": ["role", "content", "used_tools", "user_attachments", "generated_files", "translation"],
+                "additionalProperties": false
+            }
+        }
+    },
+    "required": ["title", "messages"],
+    "additionalProperties": false
+}
