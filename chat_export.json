@@ -40,12 +40,65 @@
                                 "tool_name": {
                                     "type": "string"
                                 },
-                                "parameter": {
-                                    "type": "string"
+                                "tool_parameter": {
+                                    "type": "object",
+                                    "additionalProperties": true
+                                },
+                                "is_mcp": {
+                                    "type": "boolean"
+                                },
+                                "mcp": {
+                                    "type": ["object", "null"],
+                                    "properties": {
+                                        "server": {
+                                            "type": "string"
+                                        },
+                                        "tool": {
+                                            "type": "string"
+                                        },
+                                        "result": {
+                                            "type": ["object", "null"],
+                                            "properties": {
+                                                "is_error": {
+                                                    "type": "boolean"
+                                                },
+                                                "content": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "type": {
+                                                                "type": "string",
+                                                                "enum": ["text", "image", "audio", "resource", "resource_link"]
+                                                            },
+                                                            "text": {
+                                                                "type": ["string", "null"]
+                                                            }
+                                                        },
+                                                        "required": ["type", "text"],
+                                                        "additionalProperties": false
+                                                    }
+                                                }
+                                            },
+                                            "required": ["is_error", "content"],
+                                            "additionalProperties": false
+                                        }
+                                    },
+                                    "required": ["server", "tool", "result"],
+                                    "additionalProperties": false
                                 }
                             },
-                            "required": ["tool_name", "parameter"],
-                            "additionalProperties": false
+                            "required": ["tool_name", "tool_parameter", "is_mcp", "mcp"],
+                            "additionalProperties": false,
+                            "if": {
+                                "properties": { "is_mcp": { "const": true } }
+                            },
+                            "then": {
+                                "properties": { "mcp": { "type": "object" } }
+                            },
+                            "else": {
+                                "properties": { "mcp": { "type": "null" } }
+                            }
                         }
                     },
                     "user_attachments": {
@@ -105,8 +158,19 @@
                         }
                     }
                 },
-                "required": ["role", "content", "used_tools", "user_attachments", "generated_files", "translation"],
-                "additionalProperties": false
+                "required": ["role", "content", "translation"],
+                "additionalProperties": false,
+                "if": {
+                    "properties": { "role": { "const": "assistant" } }
+                },
+                "then": {
+                    "required": ["used_tools", "generated_files"],
+                    "properties": { "user_attachments": false }
+                },
+                "else": {
+                    "required": ["user_attachments"],
+                    "properties": { "used_tools": false, "generated_files": false }
+                }
             }
         }
     },
